@@ -2,8 +2,9 @@ import { useState } from "react";
 import RTRWHLanding from "@/components/RTRWHLanding";
 import AssessmentForm from "@/components/AssessmentForm";
 import ResultsDashboard from "@/components/ResultsDashboard";
+import VRSimulation from "@/components/VRSimulation";
 
-type AppState = "landing" | "assessment" | "results";
+type AppState = "landing" | "assessment" | "results" | "vr";
 
 interface AssessmentData {
   personalInfo: {
@@ -41,6 +42,10 @@ const Index = () => {
     setCurrentView("assessment");
   };
 
+  const handleStartVR = () => {
+    setCurrentView("vr");
+  };
+
   const handleFormSubmit = (data: AssessmentData) => {
     setAssessmentData(data);
     setCurrentView("results");
@@ -57,7 +62,14 @@ const Index = () => {
   return (
     <>
       {currentView === "landing" && (
-        <RTRWHLanding onStartAssessment={handleStartAssessment} />
+        <RTRWHLanding 
+          onStartAssessment={handleStartAssessment}
+          onStartVR={handleStartVR}
+        />
+      )}
+      
+      {currentView === "vr" && (
+        <VRSimulation onBack={handleBackToLanding} />
       )}
       
       {currentView === "assessment" && (

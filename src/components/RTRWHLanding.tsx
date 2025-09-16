@@ -8,9 +8,10 @@ import costIcon from "@/assets/cost-estimation-icon.jpg";
 
 interface RTRWHLandingProps {
   onStartAssessment: () => void;
+  onStartVR: () => void;
 }
 
-export default function RTRWHLanding({ onStartAssessment }: RTRWHLandingProps) {
+export default function RTRWHLanding({ onStartAssessment, onStartVR }: RTRWHLandingProps) {
   return (
     <div className="min-h-screen bg-gradient-sky">
       {/* Hero Section */}
@@ -36,11 +37,11 @@ export default function RTRWHLanding({ onStartAssessment }: RTRWHLandingProps) {
                   Start Assessment <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-primary text-primary hover:bg-primary/10"
+                  size="lg" 
+                  onClick={onStartVR}
+                  className="gradient-earth text-white shadow-elevated hover:shadow-elevated transition-all duration-300"
                 >
-                  Learn More
+                  🥽 VR Simulation <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
             </div>

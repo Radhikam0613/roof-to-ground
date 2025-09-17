@@ -245,15 +245,20 @@ export default function VRSimulation({ onBack }: VRSimulationProps) {
 
         {/* Title Text in 3D Space */}
         {currentPhase === "selection" && (
-          <Text3D
-            font="/fonts/helvetiker_regular.typeface.json"
-            size={0.5}
-            height={0.1}
+          <Html
             position={[0, 3, 0]}
+            transform
+            style={{
+              width: "400px",
+              pointerEvents: "none"
+            }}
           >
-            RTRWH AR/VR Simulation
-            <meshNormalMaterial />
-          </Text3D>
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-white text-gradient">
+                RTRWH AR/VR Simulation
+              </h1>
+            </div>
+          </Html>
         )}
 
         <OrbitControls 

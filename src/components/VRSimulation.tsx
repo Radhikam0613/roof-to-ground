@@ -98,12 +98,12 @@ export default function VRSimulation({ onBack }: VRSimulationProps) {
       {/* Header Controls */}
       <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-center">
         <Button 
-          variant="ghost" 
+          variant="default" 
           onClick={onBack}
-          className="bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30"
+          className="bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Exit VR Mode
+          Back to Assessment
         </Button>
         
         <div className="flex gap-2">
@@ -171,7 +171,7 @@ export default function VRSimulation({ onBack }: VRSimulationProps) {
 
       {/* 3D Canvas */}
       <Canvas
-        camera={{ position: [0, 5, 10], fov: 60 }}
+        camera={{ position: [0, 8, 15], fov: 75 }}
         style={{ height: "100vh", width: "100vw" }}
       >
         <Environment preset="sunset" />
@@ -265,8 +265,9 @@ export default function VRSimulation({ onBack }: VRSimulationProps) {
           enablePan={true} 
           enableZoom={true} 
           enableRotate={true}
-          maxDistance={20}
-          minDistance={3}
+          maxDistance={25}
+          minDistance={5}
+          target={[0, 0, 0]}
         />
       </Canvas>
 

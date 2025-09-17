@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
-import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 interface WaterFlowSystemProps {
   dimensions: {
@@ -121,79 +121,79 @@ export default function WaterFlowSystem({
       )}
 
       {/* Data Display */}
-      <Text
+      <Html
         position={[dimensions.length/2 + 4, 2.5, 0]}
-        fontSize={0.3}
-        color="#FFD700"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        Storage Tank
-      </Text>
+        <div className="text-center text-yellow-400 font-bold">
+          Storage Tank
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[dimensions.length/2 + 4, 2, 0]}
-        fontSize={0.4}
-        color="#00BFFF"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        {currentLevel.toLocaleString()}L
-      </Text>
+        <div className="text-center text-sky-400 font-bold text-xl">
+          {currentLevel.toLocaleString()}L
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[dimensions.length/2 + 4, 1.6, 0]}
-        fontSize={0.25}
-        color="#FFFFFF"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        of {tankCapacity.toLocaleString()}L
-      </Text>
+        <div className="text-center text-white">
+          of {tankCapacity.toLocaleString()}L
+        </div>
+      </Html>
 
       {/* Recharge Pit Label */}
-      <Text
+      <Html
         position={[-dimensions.length/2 - 3, 0.5, 0]}
-        fontSize={0.3}
-        color="#FFD700"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        Recharge Pit
-      </Text>
+        <div className="text-center text-yellow-400 font-bold">
+          Recharge Pit
+        </div>
+      </Html>
 
       {overflow > 0 && (
-        <Text
+        <Html
           position={[-dimensions.length/2 - 3, 0, 0]}
-          fontSize={0.25}
-          color="#00FF00"
-          anchorX="center"
-          anchorY="middle"
+          transform
+          style={{ pointerEvents: "none" }}
         >
-          Recharging: {overflow.toLocaleString()}L
-        </Text>
+          <div className="text-center text-green-400">
+            Recharging: {overflow.toLocaleString()}L
+          </div>
+        </Html>
       )}
 
       {/* Monthly Collection Stats */}
-      <Text
+      <Html
         position={[0, dimensions.height + 6, 0]}
-        fontSize={0.4}
-        color="#32CD32"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        This Month: {monthlyCollection[currentMonth - 1]?.toLocaleString() || 0}L
-      </Text>
+        <div className="text-center text-green-400 font-bold text-xl">
+          This Month: {monthlyCollection[currentMonth - 1]?.toLocaleString() || 0}L
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[0, dimensions.height + 5.5, 0]}
-        fontSize={0.3}
-        color="#FFFFFF"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        Total Collected: {cumulativeCollection.toLocaleString()}L
-      </Text>
+        <div className="text-center text-white font-bold">
+          Total Collected: {cumulativeCollection.toLocaleString()}L
+        </div>
+      </Html>
 
       {/* Water Flow Animation */}
       {isPlaying && currentMonth <= 12 && (
@@ -231,15 +231,15 @@ export default function WaterFlowSystem({
             <meshLambertMaterial color="#32CD32" />
           </mesh>
           
-          <Text
+          <Html
             position={[-dimensions.length/2 - 3, -3.2, 0]}
-            fontSize={0.2}
-            color="#32CD32"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Groundwater Recharge
-          </Text>
+            <div className="text-center text-green-400">
+              Groundwater Recharge
+            </div>
+          </Html>
         </>
       )}
     </group>

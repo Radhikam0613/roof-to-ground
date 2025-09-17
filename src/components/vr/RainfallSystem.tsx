@@ -1,7 +1,7 @@
 import { useMemo, useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Points, BufferGeometry, PointsMaterial, BufferAttribute } from "three";
-import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 interface RainfallSystemProps {
   intensity: number;
@@ -103,56 +103,59 @@ export default function RainfallSystem({ intensity, area, month }: RainfallSyste
       )}
 
       {/* Rainfall Intensity Indicator */}
-      <Text
+      <Html
         position={[-area.length/2 - 3, area.height + 4, 0]}
-        fontSize={0.4}
-        color="#FFD700"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        {monthNames[month - 1]}
-      </Text>
+        <div className="text-center text-yellow-400 font-bold">
+          {monthNames[month - 1]}
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[-area.length/2 - 3, area.height + 3, 0]}
-        fontSize={0.6}
-        color={currentIntensity > 0.7 ? "#00FF00" : currentIntensity > 0.3 ? "#FFFF00" : "#FF6B6B"}
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        {(currentIntensity * 100).toFixed(0)}%
-      </Text>
+        <div className={`text-center font-bold text-xl ${
+          currentIntensity > 0.7 ? "text-green-400" : 
+          currentIntensity > 0.3 ? "text-yellow-400" : "text-red-400"
+        }`}>
+          {(currentIntensity * 100).toFixed(0)}%
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[-area.length/2 - 3, area.height + 2.2, 0]}
-        fontSize={0.3}
-        color="#FFFFFF"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        Rainfall Intensity
-      </Text>
+        <div className="text-center text-white text-sm">
+          Rainfall Intensity
+        </div>
+      </Html>
 
       {/* Rainfall Amount Indicator */}
-      <Text
+      <Html
         position={[area.length/2 + 3, area.height + 4, 0]}
-        fontSize={0.4}
-        color="#87CEEB"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        {Math.round(currentIntensity * 850)}mm
-      </Text>
+        <div className="text-center text-sky-300 font-bold">
+          {Math.round(currentIntensity * 850)}mm
+        </div>
+      </Html>
 
-      <Text
+      <Html
         position={[area.length/2 + 3, area.height + 3.2, 0]}
-        fontSize={0.3}
-        color="#FFFFFF"
-        anchorX="center"
-        anchorY="middle"
+        transform
+        style={{ pointerEvents: "none" }}
       >
-        Monthly Rainfall
-      </Text>
+        <div className="text-center text-white text-sm">
+          Monthly Rainfall
+        </div>
+      </Html>
 
       {/* Wind Effect Visualization */}
       {currentIntensity > 0.5 && (

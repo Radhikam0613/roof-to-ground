@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Mesh, BoxGeometry, MeshLambertMaterial } from "three";
-import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 interface HouseModelProps {
   position: [number, number, number];
@@ -81,36 +81,35 @@ export default function HouseModel({ position, dimensions, phase }: HouseModelPr
       {/* Dimension Labels */}
       {phase === "input" && (
         <>
-          <Text
+          <Html
             position={[0, height + 2, width/2 + 2]}
-            fontSize={0.5}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Roof Area: {length} × {width} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-bold text-lg">
+              Roof Area: {length} × {width} ft
+            </div>
+          </Html>
           
-          <Text
+          <Html
             position={[length/2 + 2, height/2, 0]}
-            fontSize={0.4}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
-            rotation={[0, -Math.PI/2, 0]}
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            L: {length} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-semibold">
+              L: {length} ft
+            </div>
+          </Html>
           
-          <Text
+          <Html
             position={[0, height/2, width/2 + 2]}
-            fontSize={0.4}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            W: {width} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-semibold">
+              W: {width} ft
+            </div>
+          </Html>
         </>
       )}
 

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Group } from "three";
-import { Text, Html } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 interface SimulationData {
   propertyType: "individual" | "township" | null;
@@ -138,15 +138,15 @@ export default function VRDataVisualization({
             </mesh>
           ))}
           
-          <Text
+          <Html
             position={[0, 2.5, 0]}
-            fontSize={0.3}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Monthly Rainfall (mm)
-          </Text>
+            <div className="text-center text-yellow-400 font-bold text-lg">
+              Monthly Rainfall (mm)
+            </div>
+          </Html>
         </group>
       )}
 
@@ -188,35 +188,35 @@ export default function VRDataVisualization({
             />
           </mesh>
 
-          <Text
+          <Html
             position={[0, 2, 0]}
-            fontSize={0.25}
-            color="#00FF00"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Environmental Impact
-          </Text>
+            <div className="text-center text-green-400 font-bold">
+              Environmental Impact
+            </div>
+          </Html>
 
-          <Text
+          <Html
             position={[0, 1.6, 0]}
-            fontSize={0.2}
-            color="#FFFFFF"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            CO₂ Saved: {Math.round(potentialCollection * 0.0002)} kg/year
-          </Text>
+            <div className="text-center text-white">
+              CO₂ Saved: {Math.round(potentialCollection * 0.0002)} kg/year
+            </div>
+          </Html>
 
-          <Text
+          <Html
             position={[0, 1.3, 0]}
-            fontSize={0.2}
-            color="#FFFFFF"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Groundwater Recharged
-          </Text>
+            <div className="text-center text-white">
+              Groundwater Recharged
+            </div>
+          </Html>
         </group>
       )}
 
@@ -236,25 +236,25 @@ export default function VRDataVisualization({
           />
         </mesh>
 
-        <Text
+        <Html
           position={[0, -1.5, 0]}
-          fontSize={0.25}
-          color="#FFD700"
-          anchorX="center"
-          anchorY="middle"
+          transform
+          style={{ pointerEvents: "none" }}
         >
-          Collection Progress
-        </Text>
+          <div className="text-center text-yellow-400 font-bold">
+            Collection Progress
+          </div>
+        </Html>
 
-        <Text
+        <Html
           position={[0, -1.8, 0]}
-          fontSize={0.3}
-          color="#32CD32"
-          anchorX="center"
-          anchorY="middle"
+          transform
+          style={{ pointerEvents: "none" }}
         >
-          {Math.round((data.currentMonth / 12) * 100)}%
-        </Text>
+          <div className="text-center text-green-400 font-bold text-xl">
+            {Math.round((data.currentMonth / 12) * 100)}%
+          </div>
+        </Html>
       </group>
 
       {/* Cost-Benefit Analysis Hologram */}
@@ -269,35 +269,35 @@ export default function VRDataVisualization({
             />
           </mesh>
 
-          <Text
+          <Html
             position={[0, 0.5, 0.1]}
-            fontSize={0.2}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Cost-Benefit Analysis
-          </Text>
+            <div className="text-center text-yellow-400 font-bold">
+              Cost-Benefit Analysis
+            </div>
+          </Html>
 
-          <Text
+          <Html
             position={[0, 0, 0.1]}
-            fontSize={0.15}
-            color="#FFFFFF"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Payback Period: {Math.round(estimatedCost / annualSavings)} years
-          </Text>
+            <div className="text-center text-white">
+              Payback Period: {Math.round(estimatedCost / annualSavings)} years
+            </div>
+          </Html>
 
-          <Text
+          <Html
             position={[0, -0.3, 0.1]}
-            fontSize={0.15}
-            color="#32CD32"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            ROI: {Math.round((annualSavings / estimatedCost) * 100)}% annually
-          </Text>
+            <div className="text-center text-green-400">
+              ROI: {Math.round((annualSavings / estimatedCost) * 100)}% annually
+            </div>
+          </Html>
         </group>
       )}
     </group>

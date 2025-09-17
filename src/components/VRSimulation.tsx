@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, Text3D, Html } from "@react-three/drei";
+import { OrbitControls, Environment, Html } from "@react-three/drei";
 import { Vector3 } from "three";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

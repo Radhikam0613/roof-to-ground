@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Group } from "three";
-import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 interface TownshipModelProps {
   position: [number, number, number];
@@ -110,36 +110,35 @@ export default function TownshipModel({ position, dimensions, phase }: TownshipM
       {/* Dimension Labels */}
       {phase === "input" && (
         <>
-          <Text
+          <Html
             position={[0, height + 3, width/2 + 3]}
-            fontSize={0.8}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Township Area: {length} × {width} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-bold text-xl">
+              Township Area: {length} × {width} ft
+            </div>
+          </Html>
           
-          <Text
+          <Html
             position={[length/2 + 3, height/2, 0]}
-            fontSize={0.6}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
-            rotation={[0, -Math.PI/2, 0]}
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Length: {length} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-semibold text-lg">
+              Length: {length} ft
+            </div>
+          </Html>
           
-          <Text
+          <Html
             position={[0, height/2, width/2 + 3]}
-            fontSize={0.6}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Width: {width} ft
-          </Text>
+            <div className="text-center text-yellow-400 font-semibold text-lg">
+              Width: {width} ft
+            </div>
+          </Html>
         </>
       )}
 
@@ -175,15 +174,15 @@ export default function TownshipModel({ position, dimensions, phase }: TownshipM
             <meshLambertMaterial color="#1E90FF" transparent opacity={0.8} />
           </mesh>
           
-          <Text
+          <Html
             position={[12, 1, 0]}
-            fontSize={0.4}
-            color="#FFD700"
-            anchorX="center"
-            anchorY="middle"
+            transform
+            style={{ pointerEvents: "none" }}
           >
-            Central Storage
-          </Text>
+            <div className="text-center text-yellow-400 font-semibold">
+              Central Storage
+            </div>
+          </Html>
         </>
       )}
     </group>

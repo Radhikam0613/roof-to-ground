@@ -49,75 +49,95 @@ export default function SpatialUI({ propertyType, onSubmit }: SpatialUIProps) {
 
   return (
     <>
-      {/* Main Input Panel */}
+      {/* Centered Main Input Panel */}
       <Html
-        position={[-8, 4, 2]}
+        position={[0, 2, 5]}
         transform
         occlude="blending"
         style={{
-          width: "400px",
-          pointerEvents: "auto"
+          width: "450px",
+          pointerEvents: "auto",
+          zIndex: 1000
         }}
       >
-        <Card className="p-6 bg-white/90 backdrop-blur-lg border-primary/20 shadow-elevated">
-          <h3 className="text-xl font-bold text-primary-deep mb-4">
-            {propertyType === "individual" ? "House" : "Township"} Dimensions
-          </h3>
-          
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="length" className="text-sm font-medium">
-                Length (feet) *
-              </Label>
-              <Input
-                id="length"
-                type="number"
-                value={dimensions.length || ""}
-                onChange={(e) => updateDimension("length", e.target.value)}
-                placeholder="e.g., 30"
-                className={`mt-1 ${errors.length ? "border-destructive" : ""}`}
-              />
-              {errors.length && (
-                <p className="text-xs text-destructive mt-1">{errors.length}</p>
-              )}
+        <div className="relative">
+          <Card className="p-6 bg-background/95 backdrop-blur-lg border shadow-2xl">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-foreground mb-2">
+                {propertyType === "individual" ? "House" : "Township"} Configuration
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Enter the dimensions and location to begin simulation
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div>
+                <Label htmlFor="length" className="text-sm font-medium text-foreground">
+                  Length (ft) *
+                </Label>
+                <Input
+                  id="length"
+                  type="number"
+                  min="1"
+                  value={dimensions.length || ""}
+                  onChange={(e) => updateDimension("length", e.target.value)}
+                  placeholder="30"
+                  className={`mt-1 ${errors.length ? "border-destructive focus:border-destructive" : "border-input"}`}
+                  aria-describedby={errors.length ? "length-error" : undefined}
+                />
+                {errors.length && (
+                  <p id="length-error" className="text-xs text-destructive mt-1" role="alert">
+                    {errors.length}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="width" className="text-sm font-medium text-foreground">
+                  Width (ft) *
+                </Label>
+                <Input
+                  id="width"
+                  type="number"
+                  min="1"
+                  value={dimensions.width || ""}
+                  onChange={(e) => updateDimension("width", e.target.value)}
+                  placeholder="25"
+                  className={`mt-1 ${errors.width ? "border-destructive focus:border-destructive" : "border-input"}`}
+                  aria-describedby={errors.width ? "width-error" : undefined}
+                />
+                {errors.width && (
+                  <p id="width-error" className="text-xs text-destructive mt-1" role="alert">
+                    {errors.width}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="height" className="text-sm font-medium text-foreground">
+                  Height (ft) *
+                </Label>
+                <Input
+                  id="height"
+                  type="number"
+                  min="1"
+                  value={dimensions.height || ""}
+                  onChange={(e) => updateDimension("height", e.target.value)}
+                  placeholder="3"
+                  className={`mt-1 ${errors.height ? "border-destructive focus:border-destructive" : "border-input"}`}
+                  aria-describedby={errors.height ? "height-error" : undefined}
+                />
+                {errors.height && (
+                  <p id="height-error" className="text-xs text-destructive mt-1" role="alert">
+                    {errors.height}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div>
-              <Label htmlFor="width" className="text-sm font-medium">
-                Width (feet) *
-              </Label>
-              <Input
-                id="width"
-                type="number"
-                value={dimensions.width || ""}
-                onChange={(e) => updateDimension("width", e.target.value)}
-                placeholder="e.g., 25"
-                className={`mt-1 ${errors.width ? "border-destructive" : ""}`}
-              />
-              {errors.width && (
-                <p className="text-xs text-destructive mt-1">{errors.width}</p>
-              )}
-            </div>
-
-            <div>
-              <Label htmlFor="height" className="text-sm font-medium">
-                Height (feet) *
-              </Label>
-              <Input
-                id="height"
-                type="number"
-                value={dimensions.height || ""}
-                onChange={(e) => updateDimension("height", e.target.value)}
-                placeholder="e.g., 3"
-                className={`mt-1 ${errors.height ? "border-destructive" : ""}`}
-              />
-              {errors.height && (
-                <p className="text-xs text-destructive mt-1">{errors.height}</p>
-              )}
-            </div>
-
-            <div>
-              <Label htmlFor="location" className="text-sm font-medium">
+            <div className="mb-6">
+              <Label htmlFor="location" className="text-sm font-medium text-foreground">
                 Location *
               </Label>
               <Input
@@ -129,86 +149,66 @@ export default function SpatialUI({ propertyType, onSubmit }: SpatialUIProps) {
                     setErrors(prev => ({ ...prev, location: "" }));
                   }
                 }}
-                placeholder="City, State"
-                className={`mt-1 ${errors.location ? "border-destructive" : ""}`}
+                placeholder="e.g., Mumbai, Maharashtra"
+                className={`mt-1 ${errors.location ? "border-destructive focus:border-destructive" : "border-input"}`}
+                aria-describedby={errors.location ? "location-error" : undefined}
               />
               {errors.location && (
-                <p className="text-xs text-destructive mt-1">{errors.location}</p>
+                <p id="location-error" className="text-xs text-destructive mt-1" role="alert">
+                  {errors.location}
+                </p>
               )}
+            </div>
+
+            {/* Live Calculations */}
+            <div className="bg-muted/50 rounded-lg p-4 mb-6">
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">Catchment Area</div>
+                  <div className="text-xl font-bold text-primary">
+                    {(dimensions.length * dimensions.width).toLocaleString()} sq ft
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-muted-foreground">Est. Annual Harvest</div>
+                  <div className="text-xl font-bold text-secondary">
+                    {Math.round((dimensions.length * dimensions.width * 850 * 0.85) / 1000).toLocaleString()}L
+                  </div>
+                </div>
+              </div>
+              <div className="text-xs text-center text-muted-foreground mt-2">
+                * Based on 850mm annual rainfall and 85% efficiency
+              </div>
             </div>
 
             <Button
               onClick={handleSubmit}
-              className="w-full gradient-water text-white shadow-water hover:shadow-elevated transition-all duration-300 mt-6"
+              size="lg"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-all duration-300"
+              disabled={!dimensions.length || !dimensions.width || !dimensions.height || !location.trim()}
             >
-              Start Simulation <ArrowRight className="ml-2 h-4 w-4" />
+              Start AR/VR Simulation <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </Card>
-      </Html>
-
-      {/* Interactive Dimension Indicators */}
-      <Html
-        position={[2, 6, 0]}
-        transform
-        occlude="blending"
-        style={{
-          width: "200px",
-          pointerEvents: "none"
-        }}
-      >
-        <div className="bg-white/80 backdrop-blur-lg rounded-lg p-3 text-center border border-primary/20">
-          <div className="text-sm font-semibold text-primary-deep">
-            Current Area
-          </div>
-          <div className="text-lg font-bold text-primary">
-            {(dimensions.length * dimensions.width).toLocaleString()} sq ft
-          </div>
-          <div className="text-xs text-muted-foreground">
-            Roof Catchment Area
-          </div>
+          </Card>
         </div>
       </Html>
 
-      {/* Calculation Preview */}
+      {/* Helper Instructions - Positioned at bottom */}
       <Html
-        position={[6, 3, -3]}
+        position={[0, -1, 3]}
         transform
         occlude="blending"
         style={{
-          width: "250px",
+          width: "350px",
           pointerEvents: "none"
         }}
       >
-        <div className="bg-secondary/20 backdrop-blur-lg rounded-lg p-3 text-center border border-secondary/30">
-          <div className="text-xs font-semibold text-secondary-foreground mb-2">
-            Estimated Annual Harvest
-          </div>
-          <div className="text-xl font-bold text-secondary">
-            {Math.round((dimensions.length * dimensions.width * 850 * 0.85) / 1000).toLocaleString()}L
+        <div className="bg-background/80 backdrop-blur-lg rounded-lg p-3 text-center border shadow-lg">
+          <div className="text-sm text-foreground font-medium mb-1">
+            💡 Navigate the 3D Scene
           </div>
           <div className="text-xs text-muted-foreground">
-            Based on 850mm rainfall
-          </div>
-        </div>
-      </Html>
-
-      {/* Instructions */}
-      <Html
-        position={[0, 1, 6]}
-        transform
-        occlude="blending"
-        style={{
-          width: "300px",
-          pointerEvents: "none"
-        }}
-      >
-        <div className="bg-earth/20 backdrop-blur-lg rounded-lg p-4 text-center border border-earth/30">
-          <div className="text-sm text-earth-light font-medium">
-            💡 Tip: Use mouse to rotate and zoom the view
-          </div>
-          <div className="text-xs text-white/70 mt-2">
-            The highlighted roof shows your catchment area
+            Click & drag to rotate • Scroll to zoom • See your roof highlighted above
           </div>
         </div>
       </Html>

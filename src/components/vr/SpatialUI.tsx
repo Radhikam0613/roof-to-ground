@@ -51,7 +51,7 @@ export default function SpatialUI({ propertyType, onSubmit }: SpatialUIProps) {
     <>
       {/* Centered Main Input Panel */}
       <Html
-        position={[0, 2, 5]}
+        position={[-6, 2, 2]}
         transform
         occlude="blending"
         style={{
@@ -195,7 +195,7 @@ export default function SpatialUI({ propertyType, onSubmit }: SpatialUIProps) {
 
       {/* Helper Instructions - Positioned at bottom */}
       <Html
-        position={[0, -1, 3]}
+        position={[0, -2, 2]}
         transform
         occlude="blending"
         style={{
